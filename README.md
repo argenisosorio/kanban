@@ -20,9 +20,10 @@ $ npm install
 $ npm run dev
 ```
 2- Cree y configure la base de datos en el archivo .env.
-
+```
 $ php artisan key:generate
 
 $ php artisan migrate
 
 $ php artisan serve
+```
