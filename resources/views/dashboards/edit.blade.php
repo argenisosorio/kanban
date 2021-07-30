@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Create dashboard</title>
+    <title>Update dashboard</title>
   </head>
   <body>
-    <h1>Create dashboard</h1>
+    <h1>Update dashboard</h1>
     @if(count($errors))
       <ul>
         @foreach($errors->all() as $error)
@@ -14,7 +14,7 @@
         @endforeach
       </ul>
     @endif
-    <form action="{{ route('dashboards.store') }}" method="POST">@csrf
+    <form action="{{ route('dashboards.update', $dashboard->id) }}" method="POST"> @csrf @method('PUT')
       <div>
         <label>Owner</label>
         <select name="owner">
@@ -25,7 +25,7 @@
       </div>
       <div>
         <label>Title</label>
-        <input type="text" name="title">
+        <input type="text" name="title" value="{{ $dashboard->title }}">
       </div>
       <button type="submit" >SAVE</button>
     </form>

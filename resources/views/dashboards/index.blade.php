@@ -31,7 +31,9 @@
         <td class="text-center">{{ $dashboard->owner }}</td>
         <td class="text-center">{{ $dashboard->title }}</td>
         <td>
-          UPDATE, SHOW, DELETE
+          <a href="{{ route('dashboards.edit', $dashboard->id) }}">
+            <button>UPDATE</button>
+          </a>
         </td>
       </tr>
       @endforeach

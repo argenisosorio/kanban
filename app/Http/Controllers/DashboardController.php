@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dashboard;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -25,7 +26,8 @@ class DashboardController extends Controller
     */
     public function create()
     {
-        return view('dashboards.create');
+        $users = User::all();
+        return view('dashboards.create')->with('users', $users);
     }
 
     /*
@@ -42,5 +44,32 @@ class DashboardController extends Controller
 
         Dashboard::create($request->all());
         return redirect()->route('dashboards.index')->with('success', 'Dashboard created successfully.');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | EDIT
+    |--------------------------------------------------------------------------
+    */
+    public function edit(Dashboard $dashboard)
+    {
+        $users = User::all();
+        return view('dashboards.edit', compact('dashboard'))->with('users', $users);;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | UPDATE
+    |--------------------------------------------------------------------------
+    */
+    public function update(Request $request, Dashboard $dashboard)
+    {
+        $request->validate([
+            'title' => 'required',
+            'owner' => 'required',
+        ]);
+        $dashboard->update($request->all());
+
+        return redirect()->route('dashboards.index')->with('success', 'Dashboard updated successfully');
     }
 }
