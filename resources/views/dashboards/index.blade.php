@@ -6,7 +6,13 @@
     <title>List of dashboards</title>
   </head>
   <body>
+    @if(Session::has('success'))
+      Message: {{ Session::get('success') }}
+    @endif
     <h1>List of dashboards</h1>
+    <a href="{{ route('dashboards.create') }}">
+      <button>NEW</button>
+    </a>
     <br />
     <br />
     <table border="1px" cellspacing="0px" style="width:100%;">

@@ -17,4 +17,30 @@ class DashboardController extends Controller
         $dashboards = Dashboard::get();
         return view('dashboards.index', compact('dashboards'));
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | CREATE
+    |--------------------------------------------------------------------------
+    */
+    public function create()
+    {
+        return view('dashboards.create');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STORE
+    |--------------------------------------------------------------------------
+    */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'owner' => 'required',
+            'title' => 'required',
+        ]);
+
+        Dashboard::create($request->all());
+        return redirect()->route('dashboards.index')->with('success', 'Dashboard created successfully.');
+    }
 }
